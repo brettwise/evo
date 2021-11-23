@@ -34,3 +34,4 @@ npm-debug.log
 
 # Editor assets
 /.vscode
+.nvimlog
