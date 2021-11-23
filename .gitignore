@@ -32,3 +32,5 @@ evo-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Editor assets
+/.vscode
