@@ -52,18 +52,18 @@ defmodule Evo.World.Matrix do
   #   [:x, :x, :x, :x, :x],
   #   [:x, :x, :x, :x, :x]
   # ]
-  def create_matrix(vector, size, acc \\ vec([]))
+  defp create_matrix(vector, size, acc \\ vec([]))
 
-  def create_matrix({final_split, remaining}, _size, acc) when vec_size(remaining) == 0,
+  defp create_matrix({final_split, remaining}, _size, acc) when vec_size(remaining) == 0,
     do: vec([final_split]) +++ acc
 
-  def create_matrix({split, remaining}, size, acc) do
+  defp create_matrix({split, remaining}, size, acc) do
     remaining
     |> Vector.split(size)
     |> create_matrix(size, vec([split]) +++ acc)
   end
 
-  def create_matrix(vector, size, acc) do
+  defp create_matrix(vector, size, acc) do
     vector
     |> Vector.split(size)
     |> create_matrix(size, acc)

@@ -8,7 +8,7 @@ defmodule Evo.World do
   alias Evo.World.Matrix
   alias Evo.World.Reaper
   alias Evo.World.Entities.Blarg
-  alias Evo.World.Entities.Vlem
+  # alias Evo.World.Entities.Vlem
 
   @attributes ~W(history current_state tick)a
   @enforce_keys @attributes
@@ -31,7 +31,7 @@ defmodule Evo.World do
     population = Vector.new([Blarg.create_population(1)])
 
     %World{
-      current_state: Matrix.populate_new_map(size, population, 1),
+      current_state: Matrix.populate_new_map(size, population),
       history: %{},
       tick: 0
     }
