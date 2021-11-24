@@ -15,7 +15,7 @@ defmodule Evo.World.Entities.Blarg do
     judge checks for conflicting plans resolves conflicts by checking stats for planned action, best wins
     then execute plans which updates the map
   """
-  @attributes ~W(common_attrs hunger intelligence speed visual_acuity)a
+  @attributes ~W(common_attrs hunger speed visual_acuity)a
   @enforce_keys @attributes
   defstruct @attributes
 
@@ -26,7 +26,6 @@ defmodule Evo.World.Entities.Blarg do
     %__MODULE__{
       common_attrs: Entities.new_entity([]),
       hunger: attrs[:hunger] || 10,
-      intelligence: random(40..80),
       speed: random(40..80),
       visual_acuity: acuity_gen()
     }
@@ -46,9 +45,9 @@ defmodule Evo.World.Entities.Blarg do
         # Log.append("A blind blarg was born.")
         0
 
-      num when num > 9_800 ->
+      num when num > 9_995 ->
         # Log.append("A blarg with super vision was born.")
-        random(90..99)
+        random(95..100)
 
       _num ->
         random(40..80)
