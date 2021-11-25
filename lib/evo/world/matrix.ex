@@ -25,21 +25,26 @@ defmodule Evo.World.Matrix do
     # calculate number of empty squares to put in vector
     empty_square_count = size * size - Vector.size(entities)
 
+    # makes them
     empty_squares =
       1..empty_square_count
       |> Aja.Enum.into(vec([]), fn _int ->
         Square.new()
       end)
 
+    # creates a vector of populated squares
     populated_squares =
       entities
       |> Vector.new()
       |> Vector.map(&Square.new(&1))
 
+    # combines and shuffles squares so entities are randomly dispersed in matrix
     randomly_dispersed_entities =
       (populated_squares +++ empty_squares)
       |> Vector.shuffle()
 
+    # takes that single vector and makes it into a matrix for an easier time
+    # thinking about things moving around map
     randomly_dispersed_entities
     |> create_matrix(size)
   end
