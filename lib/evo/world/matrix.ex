@@ -14,8 +14,9 @@ defmodule Evo.World.Matrix do
   Then we just iterate the occupied vector and go straight to that point in the matrix. but does that mean we are doing
   a deleted and insert on the occupied vector?
   """
-
-  defstruct [:occupied, :unoccupied, :graveyard]
+  @attributes [:matrix, :entity_index, :graveyard]
+  @enforce_keys @attributes
+  defstruct @attributes
   alias Aja.Vector
   alias Evo.World.Matrix.Square
   import Aja, only: [+++: 2, vec: 1, vec_size: 1]
