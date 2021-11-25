@@ -54,7 +54,7 @@ defmodule Evo.World.Matrix do
   # ]
   defp create_matrix(vector, size, acc \\ vec([]))
 
-  defp create_matrix({final_split, remaining}, _size, acc) when vec_size(remaining) == 0,
+  defp create_matrix({final_split, vec([])}, _size, acc),
     do: vec([final_split]) +++ acc
 
   defp create_matrix({split, remaining}, size, acc) do
