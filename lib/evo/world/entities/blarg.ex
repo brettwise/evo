@@ -33,9 +33,8 @@ defmodule Evo.World.Entities.Blarg do
 
   def create_population(count) do
     1..count
-    |> Enum.into(%{}, fn _int ->
-      blarg = new()
-      {blarg.common_attrs.id, blarg}
+    |> Enum.into([], fn _int ->
+      new()
     end)
   end
 

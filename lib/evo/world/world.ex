@@ -28,7 +28,7 @@ defmodule Evo.World do
   end
 
   def new(size \\ 3) do
-    population = Vector.new([Blarg.create_population(1)])
+    population = Vector.new(Blarg.create_population(1))
 
     %World{
       current_state: Matrix.populate_new_map(size, population),
