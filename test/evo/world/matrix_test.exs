@@ -6,10 +6,10 @@ defmodule EvoTest.WorldTest.MatrixTest do
   alias Evo.World.Entities.Blarg
   alias Evo.World.Entities.Vlem
 
-  import Aja, only: [vec: 1]
+  import Aja, only: [vec: 1, vec_size: 1]
 
   describe "create_matrix_from_vector/3" do
-    test "takes vector of x * x length, returns vector of x vectors containing x elements" do
+    test "returns vector of x vectors containing x elements" do
       size = 3
       vector_length = size * size
 
@@ -29,7 +29,7 @@ defmodule EvoTest.WorldTest.MatrixTest do
   end
 
   describe "randomly_place_entities/3" do
-    test "given a matrix & a vector of entities, returns entities randomly placed in matrix along w/ index where they were placed" do
+    test "returns entities randomly placed in matrix along w/ index where they were placed" do
       empty_matrix = Matrix.create_matrix_from_vector(Vector.duplicate(nil, 9), 3)
 
       entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
@@ -42,13 +42,24 @@ defmodule EvoTest.WorldTest.MatrixTest do
   end
 
   describe "new_new/2" do
-    test "given a size and vector of entities, returns a matrix struct" do
+    test "returns a matrix struct" do
       entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
       actual_matrix = Matrix.new_new(3, entity_vector)
 
       assert %Matrix{} = actual_matrix
     end
 
-    # test "given specified size returns square vector with those dimensions" do
+    test "returns a matrix, aka vector of vectors, where size specifies height, number of vectors inside vector, and width, number of elements in each inner vector, which are equal" do
+      expected_matrix_height_and_width = 3
+
+      entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
+      %Matrix{matrix: actual_matrix} = Matrix.new_new(expected_matrix_height_and_width, entity_vector)
+
+      actual_matrix_height = vec_size(actual_matrix)
+      actual_matrix_width = vec_size(actual_matrix[0])
+
+      assert actual_matrix_height == expected_matrix_height_and_width
+      assert actual_matrix_width == expected_matrix_height_and_width
+    end
   end
 end
