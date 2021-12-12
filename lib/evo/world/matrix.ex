@@ -1,19 +1,8 @@
 defmodule Evo.World.Matrix do
   @moduledoc """
   A `Matrix` models the physical space Entities move through. This is most of the state that constitutes a `World`.
-
-  ==== Notes ====
-  What actions am I going to take on the matrix?
-
-  Definitely going to randomly write to it as stuff moves around as well as dies on the map and fertilizes squares.
-
-  Deletes are the only thing that is expensive with Aja vectors. But we don't need to do that.
-
-  So if we had the full matrix and no record of where stuff was at in it we'd have to walk the full matrix each time to find
-  the entities and then update them. Which is wasteful? We could just keep a separate vector of the occupied squares during each turn.
-  Then we just iterate the occupied vector and go straight to that point in the matrix. but does that mean we are doing
-  a deleted and insert on the occupied vector?
   """
+
   @attributes [:matrix, :entity_index, :graveyard]
   @enforce_keys @attributes
   defstruct @attributes
@@ -32,44 +21,8 @@ defmodule Evo.World.Matrix do
   end
 
   @doc """
-  Q: do I create the index as I build this up?
-  Q: is there any advantage to that?
-  A: no there aren't. but if I create and index by
+  Takes a map size and some entities to place in that map and returns a matrix with those entities randomly placed.
   """
-  def populate_new_map(size, entities) when vec_size(entities) > 0 do
-    # calculate number of empty squares to put in vector
-    empty_square_count = size * size - Vector.size(entities)
-
-    # makes them
-    empty_squares =
-      1..empty_square_count
-      |> Aja.Enum.into(vec([]), fn _int ->
-        # initially I was newing up a default square for each vector member
-        # this turns out to be kind of expensive
-        # returning nil is 7 times faster (per my timings in iex)
-        # if you need a random soil fertility value, only thing in an empty square
-        # you just generate it on the fly
-        # Square.new()
-        nil
-      end)
-
-    # creates a vector of populated squares
-    populated_squares =
-      entities
-      |> Vector.new()
-      |> Vector.map(&Square.new(&1))
-
-    # combines and shuffles squares so entities are randomly dispersed in matrix
-    randomly_dispersed_entities =
-      (populated_squares +++ empty_squares)
-      |> Vector.shuffle()
-
-    # takes that single vector and makes it into a matrix for an easier time
-    # thinking about things moving around map
-    randomly_dispersed_entities
-    |> create_matrix_from_vector(size)
-  end
-
   def new_new(size, entities) do
     size
     |> calculate_matrix_element_total()
@@ -81,18 +34,6 @@ defmodule Evo.World.Matrix do
 
   defp calculate_matrix_element_total(size), do: size * size
 
-  # History
-  # initially I was newing up a default square for each vector member w/
-  # 1..count
-  # |> Aja.Enum.into(vec([]), fn _int ->
-  #   Square.new()
-  # end)
-  # this turns out to be kind of expensive
-  # returning nil is 7 times faster (per my timings in iex)
-  # But then I realized just using Vector.duplicate was an order of magnitude
-  # faster than this even
-  # if you need a random soil fertility value, only thing in an empty square,
-  # it is faster to just generate it on the fly
   def make_vector_of_empty_squares(count) do
     Aja.Vector.duplicate(nil, count)
   end
