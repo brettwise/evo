@@ -135,16 +135,18 @@ defmodule Evo.World.Matrix do
     {populated_matrix, entity_index}
   end
 
-  defp gen_random_coords(max_num_to_gen, coords_left_to_gen, acc \\ [])
-  defp gen_random_coords(_max_num_to_gen, 0, random_coords), do: random_coords
-
-  defp gen_random_coords(max_num_to_gen, coords_left_to_gen, acc) do
-    coord = {Enum.random(0..max_num_to_gen), Enum.random(0..max_num_to_gen)}
-
-    if Enum.member?(acc, coord) do
-      gen_random_coords(max_num_to_gen, coords_left_to_gen, acc)
+  defp gen_random_coords(max_num_to_gen, coords_left_to_gen, random_coords \\ []) do
+    if coords_left_to_gen == 0 do
+      random_coords
     else
-      gen_random_coords(max_num_to_gen, coords_left_to_gen - 1, [coord] ++ acc)
+      random_coord = {Enum.random(0..max_num_to_gen), Enum.random(0..max_num_to_gen)}
+      random_coord_generated_already? = Enum.member?(random_coords, random_coord)
+
+      if random_coord_generated_already? do
+        gen_random_coords(max_num_to_gen, coords_left_to_gen, random_coords)
+      else
+        gen_random_coords(max_num_to_gen, coords_left_to_gen - 1, [random_coord] ++ random_coords)
+      end
     end
   end
 
