@@ -29,7 +29,9 @@ defmodule Evo.World.Matrix do
     |> make_vector_of_empty_squares()
     |> create_matrix_from_vector(size)
     |> randomly_place_entities(entities)
-    |> create_matrix_struct()
+    |> then(fn {matrix, entity_index} ->
+      new(matrix, entity_index)
+    end)
   end
 
   defp calculate_matrix_element_total(size), do: size * size
@@ -114,8 +116,6 @@ defmodule Evo.World.Matrix do
     )
     |> elem(1)
   end
-
-  defp create_matrix_struct({matrix, entity_index}), do: new(matrix, entity_index)
 end
 
 defmodule Evo.World.Matrix.Square do
