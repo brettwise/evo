@@ -82,17 +82,17 @@ defmodule Evo.World.Matrix do
   defp calculate_matrix_element_total(size), do: size * size
 
   # History
-    # initially I was newing up a default square for each vector member w/
-    # 1..count
-    # |> Aja.Enum.into(vec([]), fn _int ->
-    #   Square.new()
-    # end)
-    # this turns out to be kind of expensive
-    # returning nil is 7 times faster (per my timings in iex)
-    # But then I realized just using Vector.duplicate was an order of magnitude
-    # faster than this even
-    # if you need a random soil fertility value, only thing in an empty square,
-    # it is faster to just generate it on the fly
+  # initially I was newing up a default square for each vector member w/
+  # 1..count
+  # |> Aja.Enum.into(vec([]), fn _int ->
+  #   Square.new()
+  # end)
+  # this turns out to be kind of expensive
+  # returning nil is 7 times faster (per my timings in iex)
+  # But then I realized just using Vector.duplicate was an order of magnitude
+  # faster than this even
+  # if you need a random soil fertility value, only thing in an empty square,
+  # it is faster to just generate it on the fly
   def make_vector_of_empty_squares(count) do
     Aja.Vector.duplicate(nil, count)
   end
@@ -119,7 +119,6 @@ defmodule Evo.World.Matrix do
         remaining
         |> Vector.split(size)
         |> create_matrix_from_vector(size, vec([split]) +++ acc)
-  end
 
       _first_call ->
         vector
@@ -149,7 +148,9 @@ defmodule Evo.World.Matrix do
     end
   end
 
-  defp place_entities(populated_matrix, vec([]) = _entities, [] = _random_coords), do: populated_matrix
+  defp place_entities(populated_matrix, vec([]) = _entities, [] = _random_coords),
+    do: populated_matrix
+
   defp place_entities(matrix, entities, [{x, y} | random_coords]) do
     {entity, remaining_entities} = Vector.pop_last!(entities)
 
@@ -162,10 +163,12 @@ defmodule Evo.World.Matrix do
 
   defp place_entity_in_matrix_at!(matrix, entity, x, y) do
     matrix
-    |> Vector.get_and_update(x,
+    |> Vector.get_and_update(
+      x,
       fn vec_row ->
         {vec_row, Vector.replace_at!(vec_row, y, Square.new(entity))}
-      end)
+      end
+    )
     |> elem(1)
   end
 

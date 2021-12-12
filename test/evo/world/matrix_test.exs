@@ -17,11 +17,12 @@ defmodule EvoTest.WorldTest.MatrixTest do
 
       actual = Matrix.create_matrix_from_vector(vector_of_nils, size)
 
-      expected = vec([
-        vec([nil, nil, nil]),
-        vec([nil, nil, nil]),
-        vec([nil, nil, nil])
-      ])
+      expected =
+        vec([
+          vec([nil, nil, nil]),
+          vec([nil, nil, nil]),
+          vec([nil, nil, nil])
+        ])
 
       assert actual == expected
     end
