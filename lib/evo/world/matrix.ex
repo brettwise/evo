@@ -110,22 +110,22 @@ defmodule Evo.World.Matrix do
     vec([:x, :x, :x, :x, :x])
   ])
   """
-  def create_matrix_from_vector(vector, size, acc \\ vec([]))
+  def create_matrix_from_vector(vector, size, acc \\ vec([])) do
+    case vector do
+      {final_split, vec([])} ->
+        vec([final_split]) +++ acc
 
-  # TODO: try this as a case statement instead and see how that feels
-  def create_matrix_from_vector({final_split, vec([])}, _size, acc),
-    do: vec([final_split]) +++ acc
-
-  def create_matrix_from_vector({split, remaining}, size, acc) do
-    remaining
-    |> Vector.split(size)
-    |> create_matrix_from_vector(size, vec([split]) +++ acc)
+      {split, remaining} ->
+        remaining
+        |> Vector.split(size)
+        |> create_matrix_from_vector(size, vec([split]) +++ acc)
   end
 
-  def create_matrix_from_vector(vector, size, acc) do
-    vector
-    |> Vector.split(size)
-    |> create_matrix_from_vector(size, acc)
+      _first_call ->
+        vector
+        |> Vector.split(size)
+        |> create_matrix_from_vector(size, acc)
+    end
   end
 
   def randomly_place_entities(empty_matrix, entities) do
