@@ -36,21 +36,16 @@ defmodule Evo.World.Matrix do
 
   defp calculate_matrix_element_total(size), do: size * size
 
-  def make_vector_of_empty_squares(count) do
-    Aja.Vector.duplicate(nil, count)
-  end
+  defp make_vector_of_empty_squares(count), do: Aja.Vector.duplicate(nil, count)
 
   @doc """
   Creates a matrix from a vector, aka a 2 dimensional vector or vector of vectors.
 
-  example:
-
+  Example:
   vec([
-    vec([:x, :x, :x, :x, :x]),
-    vec([:x, :x, :x, :x, :x]),
-    vec([:x, :x, :x, :x, :x]),
-    vec([:x, :x, :x, :x, :x]),
-    vec([:x, :x, :x, :x, :x])
+    vec([nil, nil, nil]),
+    vec([nil, %{soil...}, nil]),
+    vec([nil, nil, nil])
   ])
   """
   def create_matrix_from_vector(vector, size, acc \\ vec([])) do

@@ -6,7 +6,7 @@ defmodule EvoTest.WorldTest.MatrixTest do
   alias Evo.World.Entities.Blarg
   alias Evo.World.Entities.Vlem
 
-  import Aja, only: [vec: 1, vec_size: 1]
+  import Aja, only: [vec: 1]
 
   describe "create_matrix_from_vector/3" do
     test "takes vector of x * x length, returns vector of x vectors containing x elements" do
