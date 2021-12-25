@@ -12,14 +12,6 @@ defmodule Evo.World.Matrix do
   import Aja, only: [+++: 2, vec: 1, vec_size: 1]
   import Evo.Generators
 
-  def new(matrix, entity_index) do
-    %Matrix{
-      matrix: matrix,
-      entity_index: entity_index,
-      graveyard: nil
-    }
-  end
-
   @doc """
   Takes a map size and some entities to place in that map and returns a matrix with those entities randomly placed.
   """
@@ -28,14 +20,10 @@ defmodule Evo.World.Matrix do
     |> calculate_matrix_element_total()
     |> make_vector_of_empty_squares()
     |> create_matrix_from_vector(size)
-    |> randomly_place_entities(entities)
-    |> then(fn {matrix, entity_index} ->
-      new(matrix, entity_index)
-    end)
+    |> create_randomly_placed_entities_matrix(entities)
   end
 
   defp calculate_matrix_element_total(size), do: size * size
-
   defp make_vector_of_empty_squares(count), do: Aja.Vector.duplicate(nil, count)
 
   @doc """
@@ -65,12 +53,17 @@ defmodule Evo.World.Matrix do
     end
   end
 
-  def randomly_place_entities(empty_matrix, entities) do
+  def create_randomly_placed_entities_matrix(empty_matrix, entities) do
     size = vec_size(empty_matrix)
     entity_index = gen_random_coords(size - 1, size)
 
     populated_matrix = place_entities(empty_matrix, entities, entity_index)
-    {populated_matrix, entity_index}
+
+    %Matrix{
+      matrix: populated_matrix,
+      entity_index: entity_index,
+      graveyard: nil
+    }
   end
 
   defp gen_random_coords(max_num_to_gen, coords_left_to_gen, random_coords \\ []) do

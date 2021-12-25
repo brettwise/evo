@@ -28,13 +28,14 @@ defmodule EvoTest.WorldTest.MatrixTest do
     end
   end
 
-  describe "randomly_place_entities/3" do
+  describe "create_randomly_placed_entities_matrix/3" do
     test "returns entities randomly placed in matrix along w/ index where they were placed" do
       empty_matrix = Matrix.create_matrix_from_vector(Vector.duplicate(nil, 9), 3)
 
       entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
 
-      {actual_matrix, actual_index} = Matrix.randomly_place_entities(empty_matrix, entity_vector)
+      %{matrix: actual_matrix, entity_index: actual_index} =
+        Matrix.create_randomly_placed_entities_matrix(empty_matrix, entity_vector)
 
       # assert index coords return something (not nil)
       Enum.map(actual_index, fn {x, y} = _single_coord -> assert actual_matrix[x][y] !== nil end)
@@ -53,7 +54,9 @@ defmodule EvoTest.WorldTest.MatrixTest do
       expected_matrix_height_and_width = 3
 
       entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
-      %Matrix{matrix: actual_matrix} = Matrix.new_new(expected_matrix_height_and_width, entity_vector)
+
+      %Matrix{matrix: actual_matrix} =
+        Matrix.new_new(expected_matrix_height_and_width, entity_vector)
 
       actual_matrix_height = vec_size(actual_matrix)
       actual_matrix_width = vec_size(actual_matrix[0])
