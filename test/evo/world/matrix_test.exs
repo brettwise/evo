@@ -49,7 +49,7 @@ defmodule EvoTest.WorldTest.MatrixTest do
       assert %Matrix{} = actual_matrix
     end
 
-    test "returns a matrix, aka vector of vectors, where size specifies height, number of vectors inside vector, and width, number of elements in each inner vector, which are equal" do
+    test "returns a matrix, aka vector of vectors, where size specifies height, number of vectors inside of outside vector, and width, number of elements in each inner vector, which are equal" do
       expected_matrix_height_and_width = 3
 
       entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
