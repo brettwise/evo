@@ -16,15 +16,15 @@ defmodule Evo.World.Matrix do
   Takes a map size and some entities to place in that map and returns a matrix with those entities randomly placed.
   """
   def new_new(size, entities) do
-    size
-    |> calculate_matrix_element_total()
-    |> make_vector_of_empty_squares()
+    total_coord_points = size * size
+
+    vector_of_empty_coords =
+      Aja.Vector.duplicate(nil, total_coord_points) # nil represents empty coordinates
+
+    vector_of_empty_coords
     |> create_matrix_from_vector(size)
     |> create_randomly_placed_entities_matrix(entities)
   end
-
-  defp calculate_matrix_element_total(size), do: size * size
-  defp make_vector_of_empty_squares(count), do: Aja.Vector.duplicate(nil, count)
 
   @doc """
   Creates a matrix from a vector, aka a 2 dimensional vector or vector of vectors.
