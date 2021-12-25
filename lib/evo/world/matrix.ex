@@ -54,8 +54,8 @@ defmodule Evo.World.Matrix do
   end
 
   def create_randomly_placed_entities_matrix(empty_matrix, entities) do
-    size = vec_size(empty_matrix)
-    entity_index = gen_random_coords(size - 1, size)
+    number_of_coords_to_gen = vec_size(empty_matrix)
+    entity_index = generate_random_coords(number_of_coords_to_gen)
 
     populated_matrix = place_entities(empty_matrix, entities, entity_index)
 
@@ -66,17 +66,20 @@ defmodule Evo.World.Matrix do
     }
   end
 
-  defp gen_random_coords(max_num_to_gen, coords_left_to_gen, random_coords \\ []) do
+  defp generate_random_coords(number_of_coords_to_gen), do:
+    generate_random_coords(number_of_coords_to_gen, number_of_coords_to_gen - 1, [])
+
+  defp generate_random_coords(coords_left_to_gen, max_num_to_gen, random_coord_acc) do
     if coords_left_to_gen == 0 do
-      random_coords
+      random_coord_acc
     else
       random_coord = {Enum.random(0..max_num_to_gen), Enum.random(0..max_num_to_gen)}
-      random_coord_generated_already? = Enum.member?(random_coords, random_coord)
+      random_coord_generated_already? = Enum.member?(random_coord_acc, random_coord)
 
       if random_coord_generated_already? do
-        gen_random_coords(max_num_to_gen, coords_left_to_gen, random_coords)
+        generate_random_coords(coords_left_to_gen, max_num_to_gen, random_coord_acc)
       else
-        gen_random_coords(max_num_to_gen, coords_left_to_gen - 1, [random_coord] ++ random_coords)
+        generate_random_coords(coords_left_to_gen - 1, max_num_to_gen, [random_coord] ++ random_coord_acc)
       end
     end
   end
