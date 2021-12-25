@@ -18,8 +18,8 @@ defmodule Evo.World.Matrix do
   def new_new(size, entities) do
     total_coord_points = size * size
 
-    vector_of_empty_coords =
-      Aja.Vector.duplicate(nil, total_coord_points) # nil represents empty coordinates
+    # nil represents empty coordinates
+    vector_of_empty_coords = Aja.Vector.duplicate(nil, total_coord_points)
 
     vector_of_empty_coords
     |> create_matrix_from_vector(size)
@@ -66,8 +66,8 @@ defmodule Evo.World.Matrix do
     }
   end
 
-  defp generate_random_coords(number_of_coords_to_gen), do:
-    generate_random_coords(number_of_coords_to_gen, number_of_coords_to_gen - 1, [])
+  defp generate_random_coords(number_of_coords_to_gen),
+    do: generate_random_coords(number_of_coords_to_gen, number_of_coords_to_gen - 1, [])
 
   defp generate_random_coords(coords_left_to_gen, max_num_to_gen, random_coord_acc) do
     if coords_left_to_gen == 0 do
@@ -79,33 +79,30 @@ defmodule Evo.World.Matrix do
       if random_coord_generated_already? do
         generate_random_coords(coords_left_to_gen, max_num_to_gen, random_coord_acc)
       else
-        generate_random_coords(coords_left_to_gen - 1, max_num_to_gen, [random_coord] ++ random_coord_acc)
+        generate_random_coords(
+          coords_left_to_gen - 1,
+          max_num_to_gen,
+          [random_coord] ++ random_coord_acc
+        )
       end
     end
   end
 
-  defp place_entities(populated_matrix, vec([]) = _entities, [] = _random_coords),
-    do: populated_matrix
+  defp place_entities(matrix, entities, random_coords) do
+    if entities == vec([]) do
+      matrix
+    else
+      [{x, y} | remaining_random_coords] = random_coords
+      {entity, remaining_entities} = Vector.pop_last!(entities)
 
-  defp place_entities(matrix, entities, [{x, y} | random_coords]) do
-    {entity, remaining_entities} = Vector.pop_last!(entities)
+      updated_matrix =
+        Vector.get_and_update(matrix, x, fn vec_row ->
+          {vec_row, Vector.replace_at!(vec_row, y, Square.new(entity))}
+        end)
+        |> elem(1)
 
-    place_entities(
-      place_entity_in_matrix_at!(matrix, entity, x, y),
-      remaining_entities,
-      random_coords
-    )
-  end
-
-  defp place_entity_in_matrix_at!(matrix, entity, x, y) do
-    matrix
-    |> Vector.get_and_update(
-      x,
-      fn vec_row ->
-        {vec_row, Vector.replace_at!(vec_row, y, Square.new(entity))}
-      end
-    )
-    |> elem(1)
+      place_entities(updated_matrix, remaining_entities, remaining_random_coords)
+    end
   end
 end
 
