@@ -64,20 +64,19 @@ defmodule Evo.World.Matrix do
   defp generate_random_coords(number_of_coords_to_gen),
     do: generate_random_coords(number_of_coords_to_gen, number_of_coords_to_gen - 1, [])
 
-  defp generate_random_coords(coords_left_to_gen, max_num_to_gen, random_coord_acc) do
+  defp generate_random_coords(coords_left_to_gen, max_num_to_gen, coord_acc) do
     if coords_left_to_gen == 0 do
-      random_coord_acc
+      coord_acc
     else
       random_coord = {Enum.random(0..max_num_to_gen), Enum.random(0..max_num_to_gen)}
-      random_coord_generated_already? = Enum.member?(random_coord_acc, random_coord)
 
-      if random_coord_generated_already? do
-        generate_random_coords(coords_left_to_gen, max_num_to_gen, random_coord_acc)
+      if _coord_generated_already? = Enum.member?(coord_acc, random_coord) do
+        generate_random_coords(coords_left_to_gen, max_num_to_gen, coord_acc)
       else
         generate_random_coords(
           coords_left_to_gen - 1,
           max_num_to_gen,
-          [random_coord] ++ random_coord_acc
+          [random_coord] ++ coord_acc
         )
       end
     end
