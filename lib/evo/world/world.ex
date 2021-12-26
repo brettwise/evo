@@ -31,7 +31,7 @@ defmodule Evo.World do
     population = Vector.new(Blarg.create_population(1))
 
     %World{
-      current_state: Matrix.new_new(size, population),
+      current_state: Matrix.new(size, population),
       history: %{},
       tick: 0
     }

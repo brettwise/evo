@@ -15,7 +15,7 @@ defmodule Evo.World.Matrix do
   @doc """
   Takes a map size and some entities to place in that map and returns a matrix with those entities randomly placed.
   """
-  def new_new(size, entities) do
+  def new(size, entities) do
     # nil represents empty coordinates
     vector_of_empty_coords = Aja.Vector.duplicate(nil, _total_coord_points = size * size)
 

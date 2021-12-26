@@ -28,17 +28,17 @@ defmodule EvoTest.WorldTest.MatrixTest do
     end
   end
 
-  describe "new_new/2" do
+  describe "new/2" do
     test "returns a matrix struct" do
       actual_matrix =
-        Matrix.new_new(3, _entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()]))
+        Matrix.new(3, _entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()]))
 
       assert %Matrix{} = actual_matrix
     end
 
     test "returns a matrix, aka vector of vectors, where size specifies an equal height (vectors inside of outside vector) and width (elements in each inner vector)" do
       %{matrix: actual_matrix} =
-        Matrix.new_new(
+        Matrix.new(
           expected_matrix_height_and_width = 3,
           _entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
         )
@@ -52,7 +52,7 @@ defmodule EvoTest.WorldTest.MatrixTest do
 
     test "returns an entity index that corresponds to where entities were placed" do
       %{matrix: actual_matrix, entity_index: actual_entity_index} =
-        Matrix.new_new(3, _entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()]))
+        Matrix.new(3, _entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()]))
 
       # assert index coords return something (not nil)
       Enum.map(actual_entity_index, fn {x, y} = _single_coord ->
