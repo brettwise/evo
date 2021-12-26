@@ -30,8 +30,7 @@ defmodule EvoTest.WorldTest.MatrixTest do
 
   describe "new/2" do
     test "returns a matrix struct" do
-      actual_matrix =
-        Matrix.new(3, _entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()]))
+      actual_matrix = Matrix.new(3, _entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()]))
 
       assert %Matrix{} = actual_matrix
     end

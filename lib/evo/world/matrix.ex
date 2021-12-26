@@ -73,7 +73,11 @@ defmodule Evo.World.Matrix do
       random_coord = {Enum.random(0..max_num_to_gen), Enum.random(0..max_num_to_gen)}
 
       if _coord_generated_already? = Enum.member?(coord_acc, random_coord) do
-        generate_random_coords(coords_left_to_gen, max_num_to_gen, coord_acc)
+        generate_random_coords(
+          coords_left_to_gen,
+          max_num_to_gen,
+          coord_acc
+        )
       else
         generate_random_coords(
           coords_left_to_gen - 1,
