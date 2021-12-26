@@ -1,6 +1,7 @@
 defmodule Evo.World.Matrix do
   @moduledoc """
-  A `Matrix` models the physical space Entities move through. This is most of the state that constitutes a `World`.
+  A `Matrix` models the physical space Entities move through. This is most of the state that constitutes a
+  `World`.
   """
 
   @attributes [:matrix, :entity_index, :graveyard]
@@ -13,7 +14,8 @@ defmodule Evo.World.Matrix do
   import Evo.Generators
 
   @doc """
-  Takes a map size and some entities to place in that map and returns a matrix with those entities randomly placed.
+  Takes a map size and some entities to place in that map and returns a matrix with those entities randomly
+  placed.
   """
   def new(size, entities) do
     # nil represents empty coordinates
@@ -102,8 +104,8 @@ end
 
 defmodule Evo.World.Matrix.Square do
   @moduledoc """
-  A `Square` represents a single coordinate point in a `Matrix`. It contains the entities that make up the current
-  state of the world.
+  A `Square` represents a single coordinate point in a `Matrix`. It contains the entities that make up the
+  current state of the world.
   """
   alias Evo.World.Entities.Blarg
   alias Evo.World.Entities.Vlem
