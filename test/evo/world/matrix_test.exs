@@ -28,41 +28,36 @@ defmodule EvoTest.WorldTest.MatrixTest do
     end
   end
 
-  describe "create_randomly_placed_entities_matrix/3" do
-    test "returns entities randomly placed in matrix along w/ index where they were placed" do
-      empty_matrix = Matrix.create_matrix_from_vector(Vector.duplicate(nil, 9), 3)
-
-      entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
-
-      %{matrix: actual_matrix, entity_index: actual_index} =
-        Matrix.create_randomly_placed_entities_matrix(empty_matrix, entity_vector)
-
-      # assert index coords return something (not nil)
-      Enum.map(actual_index, fn {x, y} = _single_coord -> assert actual_matrix[x][y] !== nil end)
-    end
-  end
-
   describe "new_new/2" do
     test "returns a matrix struct" do
-      entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
-      actual_matrix = Matrix.new_new(3, entity_vector)
+      actual_matrix =
+        Matrix.new_new(3, _entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()]))
 
       assert %Matrix{} = actual_matrix
     end
 
-    test "returns a matrix, aka vector of vectors, where size specifies height, number of vectors inside of outside vector, and width, number of elements in each inner vector, which are equal" do
-      expected_matrix_height_and_width = 3
-
-      entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
-
-      %Matrix{matrix: actual_matrix} =
-        Matrix.new_new(expected_matrix_height_and_width, entity_vector)
+    test "returns a matrix, aka vector of vectors, where size specifies an equal height (vectors inside of outside vector) and width (elements in each inner vector)" do
+      %{matrix: actual_matrix} =
+        Matrix.new_new(
+          expected_matrix_height_and_width = 3,
+          _entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()])
+        )
 
       actual_matrix_height = vec_size(actual_matrix)
       actual_matrix_width = vec_size(actual_matrix[0])
 
       assert actual_matrix_height == expected_matrix_height_and_width
       assert actual_matrix_width == expected_matrix_height_and_width
+    end
+
+    test "returns an entity index that corresponds to where entities were placed" do
+      %{matrix: actual_matrix, entity_index: actual_entity_index} =
+        Matrix.new_new(3, _entity_vector = vec([Blarg.new(), Blarg.new(), Vlem.new()]))
+
+      # assert index coords return something (not nil)
+      Enum.map(actual_entity_index, fn {x, y} = _single_coord ->
+        assert actual_matrix[x][y] !== nil
+      end)
     end
   end
 end
