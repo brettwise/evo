@@ -1,4 +1,24 @@
 defmodule Evo.Benchmark do
+  @moduledoc """
+  Benchmarking utilities.
+  """
+
+  @doc """
+  Intended to be used in IEx to measure how long a function takes to run.
+  ## Examples
+    iex> short_list = [20_000]
+    iex> long_list = Enum.to_list(1..10000)
+    iex> Evo.Benchmark.measure_execution_time(fn -> short_list ++ long_list end)
+        µs: 7µs
+        ms: < 1ms
+         s: ≈ 0s
+    :ok
+    iex> Evo.Benchmark.measure_execution_time(fn -> long_list ++ short_list end)
+        µs: 338µs
+        ms: < 1ms
+         s: ≈ 0s
+    :ok
+  """
   def measure_execution_time(func) when func |> is_function do
     {µs, _} = :timer.tc(fn -> func.() end)
 

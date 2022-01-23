@@ -1,6 +1,10 @@
-defmodule Evo.World.Entities.Vlem do
-  alias Evo.World.Entities
-  import Evo.Generators
+defmodule Evo.Entities.Vlem do
+  @moduledoc """
+  Vlems are the plant based life form that reproduce through pollination and grow in the ground and generally have the
+  attributes one would expect plants to have.
+  """
+  alias Evo.Entities
+  import Evo.Randomizer
 
   defstruct ~W(
     common_attrs

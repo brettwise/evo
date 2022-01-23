@@ -1,10 +1,10 @@
-defmodule EvoTest.WorldTest.MatrixTest do
+defmodule EvoTest.StateTest.MatrixTest do
   use ExUnit.Case, async: true
 
-  alias Evo.World.Matrix
+  alias Evo.State.Matrix
   alias Aja.Vector
-  alias Evo.World.Entities.Blarg
-  alias Evo.World.Entities.Vlem
+  alias Evo.Entities.Blarg
+  alias Evo.Entities.Vlem
 
   import Aja, only: [vec: 1, vec_size: 1]
 

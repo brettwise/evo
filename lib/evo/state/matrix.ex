@@ -1,17 +1,16 @@
-defmodule Evo.World.Matrix do
+defmodule Evo.State.Matrix do
   @moduledoc """
-  A `Matrix` models the physical space Entities move through. This is most of the state that constitutes a
-  `World`.
+  A Matrix models the physical space Entities move through aka the Evo world. This is most of the state that constitutes the
+  State object/map.
   """
 
   @attributes [:matrix, :entity_index, :graveyard]
   @enforce_keys @attributes
   defstruct @attributes
   alias Aja.Vector
-  alias Evo.World.Matrix
-  alias Evo.World.Matrix.Square
+  alias Evo.State.Matrix
+  alias Evo.State.Matrix.Coordinate
   import Aja, only: [+++: 2, vec: 1, vec_size: 1]
-  import Evo.Generators
 
   @doc """
   Takes a map size and some entities to place in that map and returns a matrix with those entities randomly
@@ -70,6 +69,7 @@ defmodule Evo.World.Matrix do
     if coords_left_to_gen == 0 do
       coord_acc
     else
+      # TODO: should we use Generators.random here?
       random_coord = {Enum.random(0..max_num_to_gen), Enum.random(0..max_num_to_gen)}
 
       if _coord_generated_already? = Enum.member?(coord_acc, random_coord) do
@@ -97,40 +97,11 @@ defmodule Evo.World.Matrix do
 
       updated_matrix =
         Vector.get_and_update(matrix, x, fn vec_row ->
-          {vec_row, Vector.replace_at!(vec_row, y, Square.new(entity))}
+          {vec_row, Vector.replace_at!(vec_row, y, Coordinate.new(entity))}
         end)
         |> elem(1)
 
       place_entities(updated_matrix, remaining_entities, remaining_random_coords)
     end
   end
-end
-
-defmodule Evo.World.Matrix.Square do
-  @moduledoc """
-  A `Square` represents a single coordinate point in a `Matrix`. It contains the entities that make up the
-  current state of the world.
-  """
-  alias Evo.World.Entities.Blarg
-  alias Evo.World.Entities.Vlem
-  import Evo.Generators
-
-  @doc """
-  Contains soil fertility rating, blarg or vlem and space for mate when the time comes.
-  """
-  def new(entity \\ nil)
-  def new(%Blarg{} = blarg), do: square(nil, blarg)
-  def new(%Vlem{} = vlem), do: square(vlem, nil)
-  def new(_empty_square), do: square(nil, nil)
-
-  defp square(vlem, blarg) do
-    %{
-      soil_fertility: random_soil_fertility(),
-      vlem: vlem,
-      blarg: blarg,
-      blarg_mate: nil
-    }
-  end
-
-  defp random_soil_fertility, do: random(30..70)
 end

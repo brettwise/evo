@@ -1,4 +1,4 @@
-defmodule Evo.Generators do
+defmodule Evo.Randomizer do
   @moduledoc """
   Provides functions to generate random values.
   """

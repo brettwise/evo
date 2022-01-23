@@ -1,4 +1,7 @@
-defmodule Evo.World.Entities do
+defmodule Evo.Entities do
+  @moduledoc """
+  Common attributes shared by all Entities.
+  """
   @attributes ~w(
     age
     bears_offspring
@@ -17,7 +20,7 @@ defmodule Evo.World.Entities do
   @enforce_keys @attributes
   defstruct @attributes
 
-  import Evo.Generators
+  import Evo.Randomizer
 
   def new_entity(attrs) do
     %__MODULE__{
