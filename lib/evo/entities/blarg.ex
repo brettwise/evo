@@ -1,5 +1,7 @@
-defmodule Evo.World.Entities.Blarg do
+defmodule Evo.Entities.Blarg do
   @moduledoc """
+  The Blarg is a mammalian entity. They eat Vlems, bear children, and have other attributes one expects of mammals.
+
   ----- scratchpad ------
   Blarg.look(blarg, {x, y}) :: [{x, y}]
   Blarg.evaluate(blarg, tuple_list)
@@ -19,8 +21,8 @@ defmodule Evo.World.Entities.Blarg do
   @enforce_keys @attributes
   defstruct @attributes
 
-  alias Evo.World.Entities
-  import Evo.Generators
+  alias Evo.Entities
+  import Evo.Randomizer
 
   def new(attrs \\ []) do
     %__MODULE__{

@@ -26,7 +26,7 @@ initially I was newing up a default square for each vector member w/
 ```elixir
 1..count
 |> Aja.Enum.into(vec([]), fn _int ->
-  Square.new()
+  Coordinate.new()
 end)
 ```
 This turns out to be kind of expensive. Returning `nil` is 7 times faster (per my timings in iex).
@@ -37,7 +37,7 @@ If you need a random soil fertility value, only thing in an empty square, it is 
 
 ## Notes
 
-### Evo.World.Matrix
+### Evo.State.Matrix
 
 What actions am I going to take on the matrix?
 

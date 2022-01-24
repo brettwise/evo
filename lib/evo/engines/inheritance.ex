@@ -1,6 +1,10 @@
-defmodule Evo.World.Engines.Inheritance do
+defmodule Evo.Engines.Inheritance do
   @moduledoc """
-  From wikipedia: In genetic algorithms, inheritance is the ability of modeled objects to mate, mutate (similar to
+  Handles all things inheritance "which is the ability of modeled objects to mate, mutate (similar to
+  biological mutation), and propagate their problem solving genes to the next generation, in order to produce an
+  evolved solution to a particular problem."
+
+  Sourced from wikipedia: In genetic algorithms, inheritance is the ability of modeled objects to mate, mutate (similar to
   biological mutation), and propagate their problem solving genes to the next generation, in order to produce an
   evolved solution to a particular problem.
 
