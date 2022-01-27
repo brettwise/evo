@@ -1,21 +1,6 @@
 defmodule Evo.Entities.Blarg do
   @moduledoc """
   The Blarg is a mammalian entity. They eat Vlems, bear children, and have other attributes one expects of mammals.
-
-  ----- scratchpad ------
-  Blarg.look(blarg, {x, y}) :: [{x, y}]
-  Blarg.evaluate(blarg, tuple_list)
-    function of determining greatest need (energy 1st, mating second)
-    if hungry
-      check for vlem on current square
-        if found
-          plan eat
-        else
-          search squares for vlem
-          if found make plan to move
-    all blargs have made plan
-    judge checks for conflicting plans resolves conflicts by checking stats for planned action, best wins
-    then execute plans which updates the map
   """
   @attributes ~W(common_attrs hunger speed visual_acuity)a
   @enforce_keys @attributes

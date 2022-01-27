@@ -1,51 +1,48 @@
 # Evo
 Evolution, simulated.
 
-## 5 conditions necessary for evolution
+Evo aims to simulate the process of evolution and learn some new things while doing it.
+
+## Introduction to Evo
+If you are going to simulate evolution you need something to evolve. Evo has two such entities: Vlems and Blargs.
+
+Vlems are the plants of Evo and Blargs the animals. Each entity in Evo has unique attributes that help them survive, reproduce, pass along their attributes and adapt.
+
+We just implicitly covered the 5 conditions essential to the evolutionary process but let's explicitly state them:
+
 1. blueprints
-2. selection
-3. self-replication
-4. inheritance
-5. mutation
+2. self-replication
+3. inheritance
+4. mutation
+5. selection
 
-This simulation implements versions of them as a means for exploration.
+So Evo has to provide mechanism through which these things can happen. Here's how we do it.
 
-## Running Things
-To start your Phoenix server:
+### Blueprints
+Blueprints are modeled through each entity's has set of attributes that are randomly generated and dictate how effective they are at surviving.
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+A few Blarg attributes are: visual acuity, speed, max size and color.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+### Self-Replication
+Not much to be done with blueprints unless you can replicate yourself. So each entity has the capacity to replicate through some reproductive strategy and thus produce offspring. Which leads us to our next condition.
 
-## Learnings
+### Inheritance
 
-### A little about `make_vector_of_empty_squares`
-initially I was newing up a default square for each vector member w/
-```elixir
-1..count
-|> Aja.Enum.into(vec([]), fn _int ->
-  Coordinate.new()
-end)
-```
-This turns out to be kind of expensive. Returning `nil` is 7 times faster (per my timings in iex).
+### Mutation
 
-But then I realized just using `Vector.duplicate` was an order of magnitude faster than this even.
+### Selection
 
-If you need a random soil fertility value, only thing in an empty square, it is faster to just generate it on the fly.
+At the time of this writing only a small part of EVO is built out.
 
-## Notes
+## Getting Up & Running
+As of Jan 27, 2022 Evo is just a functional core that we pass data through.
 
-### Evo.State.Matrix
+So right now you can do 1 of 3 things: run tests, play with functions already built in `iex`, or help build this thing.
 
-What actions am I going to take on the matrix?
+  * Install dependencies: `mix deps.get`
+  * Run tests: `mix test`
+  * To play with code already written: `iex -S mix`
+  * Helping build this thing!
 
-Definitely going to randomly write to it as stuff moves around as well as dies on the map and fertilizes squares.
+## Architectural Overview
 
-Deletes are the only thing that is expensive with Aja vectors. But we don't need to do that.
-
-So if we had the full matrix and no record of where stuff was at in it we'd have to walk the full matrix each time to find
-the entities and then update them. Which is wasteful? We could just keep a separate vector of the occupied squares during each turn.
-Then we just iterate the occupied vector and go straight to that point in the matrix. but does that mean we are doing
-a deleted and insert on the occupied vector?
