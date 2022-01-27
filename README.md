@@ -3,6 +3,8 @@ Evolution, simulated.
 
 Evo aims to simulate the process of evolution and learn some new things while doing it.
 
+What started out as a personal project has been flipped to be used as a learning tool with our mentees at our weekly Elixir meetup.
+
 ## Introduction to Evo
 If you are going to simulate evolution you need something to evolve. Evo has two such entities: Vlems and Blargs.
 
@@ -46,3 +48,6 @@ So right now you can do 1 of 3 things: run tests, play with functions already bu
 
 ## Architectural Overview
 
+## Contributing/Collaborating
+
+We'll use forks to all contribute back to the main repo. If you are unfamiliar with the workflow this is a great resource to get you started: [Fork Workflow Guide from Atlassian](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow)
