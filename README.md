@@ -42,7 +42,7 @@ So right now you can do 1 of 3 things: run tests, play with functions already bu
   * Install dependencies: `mix deps.get`
   * Run tests: `mix test`
   * To play with code already written: `iex -S mix`
-  * Helping build this thing!
+  * Help build this thing!
 
 ## Architectural Overview
 
