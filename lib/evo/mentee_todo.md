@@ -1,0 +1,27 @@
+- Read what is in the readme
+  - what other sections would be helpful for you to understand what is going on?
+- Most of the code so far is in the Matrix module so it'll be important to understand it:
+	- ideas to help you explore and understand
+  	- change the test inputs and then the expectations to see if you can predict what is going to happen for a given change. then run the tests to see if you are right or wrong and why.
+  	- play with code in iex
+  - what makes sense?
+  - what is confusing?
+  - what could be made more clear?
+  - does anything strike you as odd?
+  - cut a branch and try other things as you work your way through the code. think about writing an additional test if you see some behavior that isn't tested by the test suite yet.
+	- are the docs clear?
+- check out the comments on line 31 and 35 of `blarg.ex`
+  - What this is is that Brett had started to think through a logging system, talk to Brett about his ideas and take notes in prep to think through it further.
+  - what atttributes and/or features should it have? how should it work? what parts of Elixir should it use? Should we build it from scratch or pull a library? Could we use the built into Elixir? Why or why not?
+- Go read about the Aja library
+  - What is it?
+  - What is a Vector?
+  - Why would you use it?
+  - Why do you think I might have chosen to use it here?
+  - What are some drawbacks of using it?
+- Currently inheritable and uninheritable entity attributes are mixed together. Take a look at them. Come up with more than one solution to the problem. The problem being that upon successfully reproducing the entiy is going to pass along its attributes. During this inheritance process how will be differentiate between the two classes of attributes?
+- look at the engines folder and the modules therein:
+  - do the module names make sense for what you imagine they will do?
+  - are there any modules missing given the list of 5 essential condition for evolution as listed in the readme?
+- Start in `Evo` and read your way down into the library. Take note of what is there and what is or appears to be missing.
+- The randomize module is currently untested. testing functions who's output is random and unpredictable presents an interesting challenge, see if you can write some tests for that module that will help us be sure we aren't breaking thing as we write more code or change things around.
