@@ -21,25 +21,25 @@ We just implicitly covered the 5 conditions essential to the evolutionary proces
 
 So Evo has to provide mechanism through which these things can happen. Here's how we do it.
 
-**Blueprints**
+**Blueprints**:
 Blueprints are modeled through each entity's set of attributes that are randomly generated. Those attributes dictate how effective they are at surviving.
 
 A few Blarg attributes are: visual acuity, speed, max size and color.
 
-**Self-Replication**
+**Self-Replication**:
 Not much to be done with blueprints unless you can replicate yourself. So each entity has the capacity to replicate through some reproductive strategy and thus produce offspring. Which leads us to our next condition, inheritance.
 
-**Inheritance**
+**Inheritance**:
 Once entities replicate the inheritance process begins. To do this you combine the two sets of attributes that came together in the replication process and then determine a crossover point randomly for each pair.
 
 Finally you switch the genes after the crossover point in each pair. (paraphrased and quoted from wikipedia article sourced here: https://en.wikipedia.org/wiki/Inheritance_(genetic_algorithm))
 
 There is an engine that does all of this.
 
-**Mutation**
+**Mutation**:
 Finally, with the process of inheritance done, a mutation process is determined randomly,  genes are mutated in the child objects. These mutations may be advantageous or not just like in the real world!
 
-**Selection**
+**Selection**:
 Selection in Evo is expressed incidentally through either successfully passing along genes/attributes to offspring or not. There isn't a single engine that handles this condition. Rather the property it is an emergent side effect of the interaction of simulation elements/engines.
 
 ## A Quick Code Tour
