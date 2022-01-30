@@ -13,34 +13,37 @@ Vlems are the plants of Evo and Blargs the animals. Each entity in Evo has uniqu
 
 We just implicitly covered the 5 conditions essential to the evolutionary process but let's explicitly state them here. They are:
 
-1. blueprints
-2. self-replication
-3. inheritance
-4. mutation
-5. selection
+1. Blueprints
+2. Self-replication
+3. Inheritance
+4. Mutation
+5. Selection
 
-So Evo has to provide mechanism through which these things can happen. Here's how we do it.
+In order to simulate the evolutionary process Evo has to provide mechanisms through which these things can happen. An engine is programmed to drive each of these save for one property that is emergent from the others. Here's how we do it.
 
-**Blueprints**:
-Blueprints are modeled through each entity's set of attributes that are randomly generated. Those attributes dictate how effective they are at surviving.
+**1. Blueprints**
+
+**Blueprints** are modeled through each entity's set of attributes that are randomly generated. Those attributes dictate how effective they are at surviving.
 
 A few Blarg attributes are: visual acuity, speed, max size and color.
 
-**Self-Replication**:
-Not much to be done with blueprints unless you can replicate yourself. So each entity has the capacity to replicate through some reproductive strategy and thus produce offspring. Which leads us to our next condition, inheritance.
+**2. Self-Replication**
 
-**Inheritance**:
-Once entities replicate the inheritance process begins. To do this you combine the two sets of attributes that came together in the replication process and then determine a crossover point randomly for each pair.
+Not much to be done with blueprints unless **Self-Replication** is a thing. So each entity has the capacity to replicate through some reproductive strategy and thus produce offspring. Which leads us to our next condition, inheritance.
 
-Finally you switch the genes after the crossover point in each pair. (paraphrased and quoted from wikipedia article sourced here: https://en.wikipedia.org/wiki/Inheritance_(genetic_algorithm))
+**3. Inheritance**
 
-There is an engine that does all of this.
+Once entities replicate the **Inheritance** process begins. To do this you combine the two sets of attributes that came together in the replication process and determine a random crossover point, this being the point which determines how much of each parent the child inherits.
 
-**Mutation**:
-Finally, with the process of inheritance done, a mutation process is determined randomly,  genes are mutated in the child objects. These mutations may be advantageous or not just like in the real world!
+Genes are switched after the crossover point in each pair. (paraphrased and quoted from wikipedia article sourced here: https://en.wikipedia.org/wiki/Inheritance_(genetic_algorithm))
 
-**Selection**:
-Selection in Evo is expressed incidentally through either successfully passing along genes/attributes to offspring or not. There isn't a single engine that handles this condition. Rather the property it is an emergent side effect of the interaction of simulation elements/engines.
+**4. Mutation**
+
+Finally, with the process of inheritance done, a **Mutation** process is performed where genes are mutated randomly in the child. These mutations may be advantageous or not just like in the real world!
+
+**5. Selection**
+
+Finally that brings us to **Selection**, which is expressed incidentally in Evo through either successfully passing along genes/attributes to offspring or not. There isn't a single engine that handles this condition. Rather the property it is an emergent side effect of the simulation's engines and the dynamically shifting world.
 
 ## A Quick Code Tour
 With the high level concepts out of the way that dictate Evo's structure and function, pop open your editor and take a look in `lib`.
@@ -71,6 +74,7 @@ We expect that you have Postgres install and running. It is not currently needed
 Aja Vector provides that data structure we use to model the coordinate plane in which the entities move. We needed constant time insertion for on any point in the data structure, Elixir's linked lists were too slow, so that's how we landed on this library.
 
 [Aja Vector Docs](https://github.com/sabiwara/aja)
+
 [Aja Vector Github](https://github.com/sabiwara/aja)
 
 ## Contributing/Collaborating
