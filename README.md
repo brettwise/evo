@@ -13,37 +13,37 @@ Vlems are the plants of Evo and Blargs the animals. Each entity in Evo has uniqu
 
 We just implicitly covered the 5 conditions essential to the evolutionary process but let's explicitly state them here. They are:
 
-1. Blueprints
-2. Self-replication
-3. Inheritance
-4. Mutation
-5. Selection
+**1. Blueprints**
+**2. Self-replication**
+**3. Inheritance**
+**4. Mutation**
+**5. Selection**
 
 In order to simulate the evolutionary process Evo has to provide mechanisms through which these things can happen. An engine is programmed to drive each of these save for one property that is emergent from the others. Here's how we do it.
 
 **1. Blueprints**
 
-**Blueprints** are modeled through each entity's set of attributes that are randomly generated. Those attributes dictate how effective they are at surviving.
+_**Blueprints**_ are modeled through each entity's set of attributes that are randomly generated. Those attributes dictate how effective they are at surviving.
 
 A few Blarg attributes are: visual acuity, speed, max size and color.
 
 **2. Self-Replication**
 
-Not much to be done with blueprints unless **Self-Replication** is a thing. So each entity has the capacity to replicate through some reproductive strategy and thus produce offspring. Which leads us to our next condition, inheritance.
+Not much to be done with blueprints unless _**Self-Replication**_ is a thing. So each entity has the capacity to replicate through some reproductive strategy and thus produce offspring. Which leads us to our next condition, inheritance.
 
 **3. Inheritance**
 
-Once entities replicate the **Inheritance** process begins. To do this you combine the two sets of attributes that came together in the replication process and determine a random crossover point, this being the point which determines how much of each parent the child inherits.
+Once entities replicate the _**Inheritance**_ process begins. To do this you combine the two sets of attributes that came together in the replication process and determine a random crossover point, this being the point which determines how much of each parent the child inherits.
 
 Genes are switched after the crossover point in each pair. (paraphrased and quoted from wikipedia article sourced here: https://en.wikipedia.org/wiki/Inheritance_(genetic_algorithm))
 
 **4. Mutation**
 
-Finally, with the process of inheritance done, a **Mutation** process is performed where genes are mutated randomly in the child. These mutations may be advantageous or not just like in the real world!
+Finally, with the process of inheritance done, a _**Mutation**_ process is performed where genes are mutated randomly in the child. These mutations may be advantageous or not just like in the real world!
 
 **5. Selection**
 
-Finally that brings us to **Selection**, which is expressed incidentally in Evo through either successfully passing along genes/attributes to offspring or not. There isn't a single engine that handles this condition. Rather the property it is an emergent side effect of the simulation's engines and the dynamically shifting world.
+Finally that brings us to _**Selection**_, which is expressed incidentally in Evo through either successfully passing along genes/attributes to offspring or not. There isn't a single engine that handles this condition. Rather the property it is an emergent side effect of the simulation's engines and the dynamically shifting world.
 
 ## A Quick Code Tour
 With the high level concepts out of the way that dictate Evo's structure and function, pop open your editor and take a look in `lib`.
