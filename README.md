@@ -13,11 +13,11 @@ Vlems are the plants of Evo and Blargs the animals. Each entity in Evo has uniqu
 
 We just implicitly covered the 5 conditions essential to the evolutionary process but let's explicitly state them here. They are:
 
-**1. Blueprints**
-**2. Self-replication**
-**3. Inheritance**
-**4. Mutation**
-**5. Selection**
+1. Blueprints
+2. Self-replication
+3. Inheritance
+4. Mutation
+5. Selection
 
 In order to simulate the evolutionary process Evo has to provide mechanisms through which these things can happen. An engine is programmed to drive each of these save for one property that is emergent from the others. Here's how we do it.
 
